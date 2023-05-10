@@ -1,12 +1,18 @@
 package nz.ac.auckland.se281;
 
 import nz.ac.auckland.se281.Main.Difficulty;
+import nz.ac.auckland.se281.Strategies.RandomStrategy;
 
 public class Morra {
 
-  // TODO: should this really be []
   private String name;
   private int roundNumber;
+  private String stringHumanFingers;
+  private String stringHumanSum;
+  private int humanPoints;
+  private int jarvisPoints;
+  private int pointsToWin;
+
 
   public Morra() {}
 
@@ -14,6 +20,9 @@ public class Morra {
     // TODO: UM WHAT???
     name = options[0];
     MessageCli.WELCOME_PLAYER.printMessage(name);
+    this.pointsToWin = pointsToWin;
+    humanPoints = 0;
+    jarvisPoints = 0;
     roundNumber = 1;
     return;
     
@@ -27,35 +36,41 @@ public class Morra {
     MessageCli.START_ROUND.printMessage(roundNumberString);
     MessageCli.ASK_INPUT.printMessage();
   
-    // Read input from the console
-    String input = Utils.scanner.nextLine();
-
-    // Split the input into two individual arguments
-    String[] args = input.split(" ");
-    String stringFingers = args[0];
-    String stringSum = args[1];
-
-    
-    boolean isValidInput =  checkValidFingersAndSum(stringFingers, stringSum);
+    // TODO: Is the naming of this ok?
+    boolean isValidInput =  readAndCheckFingersAndSum();
     
     // Iif it is not valid print error messages and ask for input again
     while (!isValidInput) {
       MessageCli.INVALID_INPUT.printMessage();
       MessageCli.ASK_INPUT.printMessage();
 
-      // Read input from the console
-    input = Utils.scanner.nextLine();
-
-    // Split the input into two individual arguments
-    args = input.split(" ");
-    stringFingers = args[0];
-    stringSum = args[1];
-
-    isValidInput =  checkValidFingersAndSum(stringFingers, stringSum);
+    isValidInput =  readAndCheckFingersAndSum();
     }
 
+    // TODO: is it okay to use variable declared at the top
     // Once it is a valid input print out the message 
-    MessageCli.PRINT_INFO_HAND.printMessage(name, stringFingers, stringSum);
+    MessageCli.PRINT_INFO_HAND.printMessage(name, stringHumanFingers, stringHumanSum);
+
+    // Generate and display AI ouput
+    int jarvisFingers = RandomStrategy.generateFinger();
+    int jarvisSum = RandomStrategy.generateSum(jarvisFingers);
+
+    MessageCli.PRINT_INFO_HAND.printMessage("Jarvis", String.valueOf(jarvisFingers), String.valueOf(jarvisSum));
+
+    int humanFingers = Integer.parseInt(stringHumanFingers);
+    int humanSum = Integer.parseInt(stringHumanSum);
+    
+    boolean isHumanCorrect = (humanSum == humanFingers + jarvisFingers);
+    boolean isJarvisCorrect = (jarvisSum == humanFingers + jarvisFingers);
+
+    if (isHumanCorrect && !isJarvisCorrect ){
+       MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
+    } else if (isJarvisCorrect && !isHumanCorrect){
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
+    } else {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
+    }
+
     roundNumber++;
     return;
     
@@ -64,13 +79,24 @@ public class Morra {
   public void showStats() {}
 
 
-  private boolean checkValidFingersAndSum (String stringFingers, String stringSum) {
-    return Utils.isInteger(stringFingers) 
-    && Utils.isInteger(stringSum) 
-    &&  Integer.parseInt(stringFingers)>0 
-    && Integer.parseInt(stringFingers) <= 6 
-    && Integer.parseInt(stringSum) >= 1
-    && Integer.parseInt(stringSum) <= 10;
+  private boolean readAndCheckFingersAndSum () {
+    // Read input from the console
+    String input = Utils.scanner.nextLine();
+
+    // Split the input into two individual arguments
+    String[] args = input.split(" ");
+    stringHumanFingers = args[0];
+    stringHumanSum = args[1];
+
+    // Check that number of fingers is between 0 and 5 (inclusive)
+    // And that sum is between 1 and 10 (inclusive)
+
+    return Utils.isInteger(stringHumanFingers) 
+    && Utils.isInteger(stringHumanSum) 
+    &&  Integer.parseInt(stringHumanFingers) > 0 
+    && Integer.parseInt(stringHumanFingers) <= 5 
+    && Integer.parseInt(stringHumanSum) >= 1
+    && Integer.parseInt(stringHumanSum) <= 10;
 
   }
 }
