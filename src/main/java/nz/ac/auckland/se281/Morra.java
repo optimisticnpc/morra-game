@@ -5,6 +5,7 @@ import java.util.List;
 
 import nz.ac.auckland.se281.GameDifficulties.Easy;
 import nz.ac.auckland.se281.GameDifficulties.Hard;
+import nz.ac.auckland.se281.GameDifficulties.Master;
 import nz.ac.auckland.se281.GameDifficulties.Medium;
 import nz.ac.auckland.se281.Main.Difficulty;
 
@@ -82,8 +83,8 @@ public class Morra {
       jarvisSum = Hard.generateSum(jarvisFingers, roundNumber, numbersPlayed);
 
     } else {
-      jarvisFingers = 0;
-      jarvisSum = 0;
+      jarvisFingers = Master.generateFinger();
+      jarvisSum = Master.generateSum(jarvisFingers, roundNumber, numbersPlayed);
     }
 
    
