@@ -1,7 +1,11 @@
 package nz.ac.auckland.se281;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import nz.ac.auckland.se281.GameDifficulties.Easy;
+import nz.ac.auckland.se281.GameDifficulties.Medium;
 import nz.ac.auckland.se281.Main.Difficulty;
-import nz.ac.auckland.se281.Strategies.RandomStrategy;
 
 public class Morra {
 
@@ -12,15 +16,23 @@ public class Morra {
   private int humanPoints;
   private int jarvisPoints;
   private int pointsToWin;
+  private Difficulty difficulty;
+  private List<Integer> numbersPlayed; 
+
 
 
   public Morra() {}
 
   public void newGame(Difficulty difficulty, int pointsToWin, String[] options) {
-    // TODO: UM WHAT???
+    numbersPlayed = new ArrayList<>();
+    this.difficulty = difficulty;
+
+    this.pointsToWin = pointsToWin;
+    //TODO: UM WHAT??? 
     name = options[0];
     MessageCli.WELCOME_PLAYER.printMessage(name);
-    this.pointsToWin = pointsToWin;
+
+
     humanPoints = 0;
     jarvisPoints = 0;
     roundNumber = 1;
@@ -39,7 +51,7 @@ public class Morra {
     // TODO: Is the naming of this ok?
     boolean isValidInput =  readAndCheckFingersAndSum();
     
-    // Iif it is not valid print error messages and ask for input again
+    // If it is not valid print error messages and ask for input again
     while (!isValidInput) {
       MessageCli.INVALID_INPUT.printMessage();
       MessageCli.ASK_INPUT.printMessage();
@@ -51,9 +63,27 @@ public class Morra {
     // Once it is a valid input print out the message 
     MessageCli.PRINT_INFO_HAND.printMessage(name, stringHumanFingers, stringHumanSum);
 
-    // Generate and display AI ouput
-    int jarvisFingers = RandomStrategy.generateFinger();
-    int jarvisSum = RandomStrategy.generateSum(jarvisFingers);
+    // Pass in difficulty
+
+    int jarvisFingers = 0;
+    int jarvisSum = 0;
+    // EASY
+    if (difficulty.equals(difficulty.EASY)) {
+      jarvisFingers = Easy.generateFinger();
+      jarvisSum = Easy.generateSum(jarvisFingers);
+
+    } else if (difficulty.equals(difficulty.MEDIUM)) {
+      jarvisFingers = Medium.generateFinger();
+      jarvisSum = Medium.generateSum(jarvisFingers, roundNumber, numbersPlayed);
+
+    } else if (difficulty.equals(difficulty.HARD)) {
+
+    } else {
+      jarvisFingers = 0;
+      jarvisSum = 0;
+    }
+
+   
 
     MessageCli.PRINT_INFO_HAND.printMessage("Jarvis", String.valueOf(jarvisFingers), String.valueOf(jarvisSum));
 
@@ -70,6 +100,9 @@ public class Morra {
     } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
     }
+
+    // Store number that player played in the arraylist
+    numbersPlayed.add(humanFingers);
 
     roundNumber++;
     return;
@@ -99,4 +132,10 @@ public class Morra {
     && Integer.parseInt(stringHumanSum) <= 10;
 
   }
+
+
+  public int getRoundNumber() {
+    return roundNumber;
+  }
+
 }
