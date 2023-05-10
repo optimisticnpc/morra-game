@@ -6,7 +6,8 @@ import java.util.Scanner;
 // cannto change this class the only thing you can do is to add a random seed Random to obtain deterministic behaviours (see handout)
 public class Utils {
 
-  public static Random random = new Random(1);
+  // TODO: remove random(1)
+  public static Random random = new Random();
 
   public static Scanner scanner = new Scanner(System.in);
 
