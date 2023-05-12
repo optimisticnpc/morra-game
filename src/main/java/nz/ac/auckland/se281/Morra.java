@@ -2,10 +2,7 @@ package nz.ac.auckland.se281;
 
 import java.util.ArrayList;
 import java.util.List;
-import nz.ac.auckland.se281.GameDifficulties.Easy;
-import nz.ac.auckland.se281.GameDifficulties.Hard;
-import nz.ac.auckland.se281.GameDifficulties.Master;
-import nz.ac.auckland.se281.GameDifficulties.Medium;
+import nz.ac.auckland.se281.GameDifficulties.Difficulties;
 import nz.ac.auckland.se281.Main.Difficulty;
 
 public class Morra {
@@ -65,22 +62,9 @@ public class Morra {
     int jarvisFingers = 0;
     int jarvisSum = 0;
 
-    if (difficulty.equals(difficulty.EASY)) {
-      jarvisFingers = Easy.generateFinger();
-      jarvisSum = Easy.generateSum(jarvisFingers);
-
-    } else if (difficulty.equals(difficulty.MEDIUM)) {
-      jarvisFingers = Medium.generateFinger();
-      jarvisSum = Medium.generateSum(jarvisFingers, roundNumber, numbersPlayed);
-
-    } else if (difficulty.equals(difficulty.HARD)) {
-      jarvisFingers = Hard.generateFinger();
-      jarvisSum = Hard.generateSum(jarvisFingers, roundNumber, numbersPlayed);
-
-    } else {
-      jarvisFingers = Master.generateFinger();
-      jarvisSum = Master.generateSum(jarvisFingers, roundNumber, numbersPlayed);
-    }
+    Difficulties aiBot = AiFactory.createAiBot(difficulty);
+    jarvisFingers = aiBot.generateFingers();
+    jarvisSum = aiBot.generateSum(jarvisFingers, roundNumber, numbersPlayed);
 
     MessageCli.PRINT_INFO_HAND.printMessage(
         "Jarvis", String.valueOf(jarvisFingers), String.valueOf(jarvisSum));

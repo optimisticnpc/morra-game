@@ -7,11 +7,13 @@ import nz.ac.auckland.se281.Strategies.Top;
 
 public class Master implements Difficulties {
 
-  public static int generateFinger() {
+  @Override
+  public int generateFingers() {
     return Random.generateFinger();
   }
 
-  public static int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed) {
+  @Override
+  public int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed) {
     if (roundNumber < 4) {
       return Random.generateSum(fingers);
     }
