@@ -2,7 +2,7 @@ package nz.ac.auckland.se281.Strategies;
 
 import nz.ac.auckland.se281.Utils;
 
-public class RandomStrategy implements Strategies {
+public class Random implements Strategies {
     
     public static int generateFinger() {
         return Utils.getRandomNumber(1,5);

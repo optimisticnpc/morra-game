@@ -2,7 +2,6 @@ package nz.ac.auckland.se281;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import nz.ac.auckland.se281.GameDifficulties.Easy;
 import nz.ac.auckland.se281.GameDifficulties.Hard;
 import nz.ac.auckland.se281.GameDifficulties.Master;
@@ -19,9 +18,7 @@ public class Morra {
   private int jarvisPoints;
   private int pointsToWin;
   private Difficulty difficulty;
-  private List<Integer> numbersPlayed; 
-
-
+  private List<Integer> numbersPlayed;
 
   public Morra() {}
 
@@ -30,20 +27,17 @@ public class Morra {
     this.difficulty = difficulty;
 
     this.pointsToWin = pointsToWin;
-    //TODO: UM WHAT??? 
     name = options[0];
     MessageCli.WELCOME_PLAYER.printMessage(name);
 
     resetGame();
     roundNumber = 1;
     return;
-    
   }
- 
 
   public void play() {
     // If round number is not a positive integer we know the a game has not started
-    if (roundNumber < 0 ) {
+    if (roundNumber < 0) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
@@ -52,27 +46,25 @@ public class Morra {
     String roundNumberString = String.valueOf(roundNumber);
     MessageCli.START_ROUND.printMessage(roundNumberString);
     MessageCli.ASK_INPUT.printMessage();
-  
+
     // TODO: Is the naming of this ok?
-    boolean isValidInput =  readAndCheckFingersAndSum();
-    
+    boolean isValidInput = readAndCheckFingersAndSum();
+
     // If it is not valid print error messages and ask for input again
     while (!isValidInput) {
       MessageCli.INVALID_INPUT.printMessage();
       MessageCli.ASK_INPUT.printMessage();
 
-    isValidInput =  readAndCheckFingersAndSum();
+      isValidInput = readAndCheckFingersAndSum();
     }
 
     // TODO: is it okay to use variable declared at the top
-    // Once it is a valid input print out the message 
+    // Once it is a valid input print out the message
     MessageCli.PRINT_INFO_HAND.printMessage(name, stringHumanFingers, stringHumanSum);
-
-   
 
     int jarvisFingers = 0;
     int jarvisSum = 0;
-   
+
     if (difficulty.equals(difficulty.EASY)) {
       jarvisFingers = Easy.generateFinger();
       jarvisSum = Easy.generateSum(jarvisFingers);
@@ -90,24 +82,23 @@ public class Morra {
       jarvisSum = Master.generateSum(jarvisFingers, roundNumber, numbersPlayed);
     }
 
-   
-
-    MessageCli.PRINT_INFO_HAND.printMessage("Jarvis", String.valueOf(jarvisFingers), String.valueOf(jarvisSum));
+    MessageCli.PRINT_INFO_HAND.printMessage(
+        "Jarvis", String.valueOf(jarvisFingers), String.valueOf(jarvisSum));
 
     int humanFingers = Integer.parseInt(stringHumanFingers);
     int humanSum = Integer.parseInt(stringHumanSum);
-    
+
     boolean isHumanCorrect = (humanSum == humanFingers + jarvisFingers);
     boolean isJarvisCorrect = (jarvisSum == humanFingers + jarvisFingers);
 
-    if (isHumanCorrect && !isJarvisCorrect ){
-       MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
-       humanPoints++;
-    } else if (isJarvisCorrect && !isHumanCorrect){
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
-        jarvisPoints++;
+    if (isHumanCorrect && !isJarvisCorrect) {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
+      humanPoints++;
+    } else if (isJarvisCorrect && !isHumanCorrect) {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
+      jarvisPoints++;
     } else {
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
     }
 
     // Check if someone has won
@@ -124,26 +115,24 @@ public class Morra {
 
     // Store number that player played in the arraylist
     numbersPlayed.add(humanFingers);
-    roundNumber++; 
+    roundNumber++;
     return;
-    
   }
 
   public void showStats() {
     // If round number has not started, show the error message
-    if (roundNumber < 0 ) {
-    MessageCli.GAME_NOT_STARTED.printMessage();
-    return;
+    if (roundNumber < 0) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
     }
 
-    MessageCli.PRINT_PLAYER_WINS.printMessage(name, String.valueOf(humanPoints), String.valueOf(pointsToWin - humanPoints));
-    MessageCli.PRINT_PLAYER_WINS.printMessage("Jarvis", String.valueOf(jarvisPoints), String.valueOf(pointsToWin - jarvisPoints));
-
-
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        name, String.valueOf(humanPoints), String.valueOf(pointsToWin - humanPoints));
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        "Jarvis", String.valueOf(jarvisPoints), String.valueOf(pointsToWin - jarvisPoints));
   }
 
-
-  private boolean readAndCheckFingersAndSum () {
+  private boolean readAndCheckFingersAndSum() {
     // Read input from the console
     String input = Utils.scanner.nextLine();
 
@@ -155,20 +144,17 @@ public class Morra {
     // Check that number of fingers is between 0 and 5 (inclusive)
     // And that sum is between 1 and 10 (inclusive)
 
-    return Utils.isInteger(stringHumanFingers) 
-    && Utils.isInteger(stringHumanSum) 
-    &&  Integer.parseInt(stringHumanFingers) > 0 
-    && Integer.parseInt(stringHumanFingers) <= 5 
-    && Integer.parseInt(stringHumanSum) >= 1
-    && Integer.parseInt(stringHumanSum) <= 10;
-
+    return Utils.isInteger(stringHumanFingers)
+        && Utils.isInteger(stringHumanSum)
+        && Integer.parseInt(stringHumanFingers) > 0
+        && Integer.parseInt(stringHumanFingers) <= 5
+        && Integer.parseInt(stringHumanSum) >= 1
+        && Integer.parseInt(stringHumanSum) <= 10;
   }
-
 
   private void resetGame() {
     humanPoints = 0;
     jarvisPoints = 0;
     roundNumber = -1;
   }
-
 }

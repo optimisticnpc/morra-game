@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -48,11 +47,9 @@ public abstract class CliTest {
     return captureOut.toString();
   }
 
-
-
   /** Timeout if test runs longer than 10 seconds */
   // TODO: Uncomment this
-  //  @Rule public Timeout timeout = new Timeout(10, TimeUnit.SECONDS);
+  @Rule public Timeout timeout = new Timeout(10, TimeUnit.SECONDS);
 
   /**
    * Configures the test output and input streams, by creating new temporary streams while storing
@@ -120,13 +117,16 @@ public abstract class CliTest {
    * @throws NoSuchMethodException
    * @throws InvocationTargetException
    */
-  public void runCommands(Object ... commands)
-      throws NoSuchElementException, IllegalArgumentException, IllegalAccessException,
-          InstantiationException, SecurityException, NoSuchMethodException,
+  public void runCommands(Object... commands)
+      throws NoSuchElementException,
+          IllegalArgumentException,
+          IllegalAccessException,
+          InstantiationException,
+          SecurityException,
+          NoSuchMethodException,
           InvocationTargetException {
     inputs.add(commands);
 
-   
     StringBuilder sb = new StringBuilder();
     for (Object cmdString : commands) {
       sb.append(cmdString.toString());
@@ -217,10 +217,9 @@ public abstract class CliTest {
     }
   }
 
-  public String getOutput(){
+  public String getOutput() {
     return captureOut.toString();
   }
-
 
   /**
    * Asserts that the input string occurs within a substring of the captureOut and fails the test if
