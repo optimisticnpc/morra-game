@@ -1,22 +1,13 @@
-package nz.ac.auckland.se281.GameDifficulties;
+package nz.ac.auckland.se281.gamedifficulties;
 
-import java.util.List;
-import nz.ac.auckland.se281.Strategies.Average;
-import nz.ac.auckland.se281.Strategies.Random;
+import nz.ac.auckland.se281.strategies.Average;
 
-public class Medium implements Difficulties {
+public class Medium extends Difficulties {
 
   @Override
-  public int generateFingers() {
-    return Random.generateFinger();
-  }
-
-  @Override
-  public int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed) {
-    if (roundNumber < 4) {
-      return Random.generateSum(fingers);
+  public void setStrategy(int roundNumber) {
+    if (roundNumber > 3) {
+      this.strategy = new Average();
     }
-
-    return Average.useAverageStrategy(fingers, roundNumber, numbersPlayed);
   }
 }

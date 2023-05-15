@@ -1,10 +1,24 @@
-package nz.ac.auckland.se281.GameDifficulties;
+package nz.ac.auckland.se281.gamedifficulties;
 
 import java.util.List;
+import nz.ac.auckland.se281.strategies.Random;
+import nz.ac.auckland.se281.strategies.Strategy;
 
-public interface Difficulties {
+public abstract class Difficulties {
 
-  public int generateFingers();
+  protected Strategy strategy;
 
-  public int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed);
+  public Difficulties() {
+    this.strategy = new Random();
+  }
+
+  public void setStrategy(int roundNumber) {}
+
+  public int generateFinger() {
+    return strategy.generateFinger();
+  }
+
+  public int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed) {
+    return strategy.generateSum(fingers, roundNumber, numbersPlayed);
+  }
 }

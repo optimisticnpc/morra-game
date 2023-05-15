@@ -2,8 +2,8 @@ package nz.ac.auckland.se281;
 
 import java.util.ArrayList;
 import java.util.List;
-import nz.ac.auckland.se281.GameDifficulties.Difficulties;
 import nz.ac.auckland.se281.Main.Difficulty;
+import nz.ac.auckland.se281.gamedifficulties.Difficulties;
 
 public class Morra {
 
@@ -63,7 +63,8 @@ public class Morra {
     int jarvisSum = 0;
 
     Difficulties aiBot = AiFactory.createAiBot(difficulty);
-    jarvisFingers = aiBot.generateFingers();
+    aiBot.setStrategy(roundNumber);
+    jarvisFingers = aiBot.generateFinger();
     jarvisSum = aiBot.generateSum(jarvisFingers, roundNumber, numbersPlayed);
 
     MessageCli.PRINT_INFO_HAND.printMessage(

@@ -1,26 +1,20 @@
-package nz.ac.auckland.se281.GameDifficulties;
+package nz.ac.auckland.se281.gamedifficulties;
 
-import java.util.List;
-import nz.ac.auckland.se281.Strategies.Average;
-import nz.ac.auckland.se281.Strategies.Random;
-import nz.ac.auckland.se281.Strategies.Top;
+import nz.ac.auckland.se281.strategies.Average;
+import nz.ac.auckland.se281.strategies.Top;
 
-public class Master implements Difficulties {
+public class Master extends Difficulties {
 
   @Override
-  public int generateFingers() {
-    return Random.generateFinger();
-  }
-
-  @Override
-  public int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed) {
-    if (roundNumber < 4) {
-      return Random.generateSum(fingers);
+  public void setStrategy(int roundNumber) {
+    // If the round number is greater than 3 start alternating between the Average and Top
+    // strategies
+    if (roundNumber > 3) {
+      if (roundNumber % 2 == 0) {
+        this.strategy = new Average();
+      } else if (roundNumber % 2 == 1) {
+        this.strategy = new Top();
+      }
     }
-
-    if (roundNumber % 2 == 0) {
-      return Average.useAverageStrategy(fingers, roundNumber, numbersPlayed);
-    }
-    return Top.useTopStrategy(fingers, roundNumber, numbersPlayed);
   }
 }
