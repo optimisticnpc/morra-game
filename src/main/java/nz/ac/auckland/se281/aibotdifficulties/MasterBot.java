@@ -3,7 +3,7 @@ package nz.ac.auckland.se281.aibotdifficulties;
 import nz.ac.auckland.se281.strategies.Average;
 import nz.ac.auckland.se281.strategies.Top;
 
-public class Master extends AiBot {
+public class MasterBot extends AiBot {
 
   @Override
   public void chooseStrategy(int roundNumber) {

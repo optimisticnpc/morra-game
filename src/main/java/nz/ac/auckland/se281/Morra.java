@@ -32,7 +32,6 @@ public class Morra {
 
     resetGame();
     roundNumber = 1;
-    return;
   }
 
   public void play() {
@@ -60,8 +59,8 @@ public class Morra {
     // Once it is a valid input print out the message
     MessageCli.PRINT_INFO_HAND.printMessage(name, stringHumanFingers, stringHumanSum);
 
-    int jarvisFingers = 0;
-    int jarvisSum = 0;
+    int jarvisFingers;
+    int jarvisSum;
 
     // Create a new ai bot at the specified difficulty
     // Generate a finger and sum
@@ -105,7 +104,6 @@ public class Morra {
     // Store number that player played in the arraylist
     numbersPlayed.add(humanFingers);
     roundNumber++;
-    return;
   }
 
   public void showStats() {

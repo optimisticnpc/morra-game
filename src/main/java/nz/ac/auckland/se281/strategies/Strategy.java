@@ -8,4 +8,3 @@ public interface Strategy {
 
   public int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed);
 }
-
