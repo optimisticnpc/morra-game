@@ -5,9 +5,9 @@ import nz.ac.auckland.se281.strategies.Top;
 public class Hard extends AiBot {
 
   @Override
-  public void setStrategy(int roundNumber) {
+  public void chooseStrategy(int roundNumber) {
     if (roundNumber > 3) {
-      this.strategy = new Top();
+      setStrategy(new Top());
     }
   }
 }

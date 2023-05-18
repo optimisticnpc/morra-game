@@ -6,14 +6,18 @@ import nz.ac.auckland.se281.strategies.Strategy;
 
 public abstract class AiBot {
 
-  protected Strategy strategy;
+  private Strategy strategy;
 
   public AiBot() {
     // Every difficulty starts with the random strategy
     this.strategy = new Random();
   }
 
-  public void setStrategy(int roundNumber) {}
+  public void chooseStrategy(int roundNumber) {}
+
+  public void setStrategy(Strategy strategy) {
+    this.strategy = strategy;
+  }
 
   public int generateFinger() {
     return strategy.generateFinger();

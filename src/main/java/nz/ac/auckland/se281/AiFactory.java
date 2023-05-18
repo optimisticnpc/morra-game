@@ -11,18 +11,22 @@ public class AiFactory {
 
   public static AiBot createAiBot(Difficulty difficulty) {
     // Return an ai bot for the specified difficulty
-    // TODO: fix this error
-    if (difficulty.equals(difficulty.EASY)) {
-      return new Easy();
 
-    } else if (difficulty.equals(difficulty.MEDIUM)) {
-      return new Medium();
+    switch (difficulty) {
+      case EASY:
+        return new Easy();
 
-    } else if (difficulty.equals(difficulty.HARD)) {
-      return new Hard();
+      case MEDIUM:
+        return new Medium();
 
-    } else {
-      return new Master();
+      case HARD:
+        return new Hard();
+
+      case MASTER:
+        return new Master();
+
+      default:
+        return null;
     }
   }
 }

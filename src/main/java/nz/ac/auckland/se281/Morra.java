@@ -68,7 +68,7 @@ public class Morra {
     // Create a new ai bot at the specified difficulty
     // Generate a finger and sum
     AiBot aiBot = AiFactory.createAiBot(difficulty);
-    aiBot.setStrategy(roundNumber);
+    aiBot.chooseStrategy(roundNumber);
     jarvisFingers = aiBot.generateFinger();
     jarvisSum = aiBot.generateSum(jarvisFingers, roundNumber, numbersPlayed);
 
