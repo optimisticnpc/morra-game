@@ -14,3 +14,5 @@ public class Random implements Strategy {
     return fingers + Utils.getRandomNumber(1, 5);
   }
 }
+
+

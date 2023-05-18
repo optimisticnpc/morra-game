@@ -1,4 +1,4 @@
-package nz.ac.auckland.se281.gamedifficulties;
+package nz.ac.auckland.se281.aibotdifficulties;
 
 import nz.ac.auckland.se281.strategies.Average;
 import nz.ac.auckland.se281.strategies.Top;

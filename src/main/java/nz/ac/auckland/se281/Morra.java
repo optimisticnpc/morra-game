@@ -3,7 +3,7 @@ package nz.ac.auckland.se281;
 import java.util.ArrayList;
 import java.util.List;
 import nz.ac.auckland.se281.Main.Difficulty;
-import nz.ac.auckland.se281.gamedifficulties.AiBot;
+import nz.ac.auckland.se281.aibotdifficulties.AiBot;
 
 public class Morra {
 
@@ -47,7 +47,6 @@ public class Morra {
     MessageCli.START_ROUND.printMessage(roundNumberString);
     MessageCli.ASK_INPUT.printMessage();
 
-    // TODO: Is the naming of this ok?
     boolean isValidInput = readAndCheckFingersAndSum();
 
     // If it is not valid print error messages and ask for input again
@@ -58,7 +57,6 @@ public class Morra {
       isValidInput = readAndCheckFingersAndSum();
     }
 
-    // TODO: is it good practice to use variables declared at the top/in Morra
     // Once it is a valid input print out the message
     MessageCli.PRINT_INFO_HAND.printMessage(name, stringHumanFingers, stringHumanSum);
 

@@ -22,3 +22,5 @@ public class Average implements Strategy {
     return fingers + average;
   }
 }
+
+

@@ -1,4 +1,4 @@
-package nz.ac.auckland.se281.gamedifficulties;
+package nz.ac.auckland.se281.aibotdifficulties;
 
 import java.util.List;
 import nz.ac.auckland.se281.strategies.Random;
@@ -23,7 +23,6 @@ public abstract class AiBot {
     return strategy.generateFinger();
   }
 
-  // TODO: Is there a problem to have extra inputs
   public int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed) {
     return strategy.generateSum(fingers, roundNumber, numbersPlayed);
   }

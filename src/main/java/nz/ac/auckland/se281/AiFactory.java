@@ -1,11 +1,11 @@
 package nz.ac.auckland.se281;
 
 import nz.ac.auckland.se281.Main.Difficulty;
-import nz.ac.auckland.se281.gamedifficulties.AiBot;
-import nz.ac.auckland.se281.gamedifficulties.Easy;
-import nz.ac.auckland.se281.gamedifficulties.Hard;
-import nz.ac.auckland.se281.gamedifficulties.Master;
-import nz.ac.auckland.se281.gamedifficulties.Medium;
+import nz.ac.auckland.se281.aibotdifficulties.AiBot;
+import nz.ac.auckland.se281.aibotdifficulties.Easy;
+import nz.ac.auckland.se281.aibotdifficulties.Hard;
+import nz.ac.auckland.se281.aibotdifficulties.Master;
+import nz.ac.auckland.se281.aibotdifficulties.Medium;
 
 public class AiFactory {
 
