@@ -2,7 +2,7 @@ package nz.ac.auckland.se281.gamedifficulties;
 
 import nz.ac.auckland.se281.strategies.Top;
 
-public class Hard extends Difficulties {
+public class Hard extends AiBot {
 
   @Override
   public void setStrategy(int roundNumber) {

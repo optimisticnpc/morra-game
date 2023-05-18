@@ -4,11 +4,12 @@ import java.util.List;
 import nz.ac.auckland.se281.strategies.Random;
 import nz.ac.auckland.se281.strategies.Strategy;
 
-public abstract class Difficulties {
+public abstract class AiBot {
 
   protected Strategy strategy;
 
-  public Difficulties() {
+  public AiBot() {
+    // Every difficulty starts with the random strategy
     this.strategy = new Random();
   }
 
@@ -18,6 +19,7 @@ public abstract class Difficulties {
     return strategy.generateFinger();
   }
 
+  // TODO: Is there a problem to have extra inputs
   public int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed) {
     return strategy.generateSum(fingers, roundNumber, numbersPlayed);
   }

@@ -3,7 +3,7 @@ package nz.ac.auckland.se281;
 import java.util.ArrayList;
 import java.util.List;
 import nz.ac.auckland.se281.Main.Difficulty;
-import nz.ac.auckland.se281.gamedifficulties.Difficulties;
+import nz.ac.auckland.se281.gamedifficulties.AiBot;
 
 public class Morra {
 
@@ -13,17 +13,20 @@ public class Morra {
   private String stringHumanSum;
   private int humanPoints;
   private int jarvisPoints;
-  private int pointsToWin;
+  private int numPointsToWin;
   private Difficulty difficulty;
   private List<Integer> numbersPlayed;
 
   public Morra() {}
 
-  public void newGame(Difficulty difficulty, int pointsToWin, String[] options) {
+  public void newGame(Difficulty difficulty, int numPointsToWin, String[] options) {
     numbersPlayed = new ArrayList<>();
-    this.difficulty = difficulty;
 
-    this.pointsToWin = pointsToWin;
+    // Set difficulty and number of points to win
+    this.difficulty = difficulty;
+    this.numPointsToWin = numPointsToWin;
+
+    // Set name and display welcome message
     name = options[0];
     MessageCli.WELCOME_PLAYER.printMessage(name);
 
@@ -55,14 +58,16 @@ public class Morra {
       isValidInput = readAndCheckFingersAndSum();
     }
 
-    // TODO: is it okay to use variable declared at the top
+    // TODO: is it good practice to use variables declared at the top/in Morra
     // Once it is a valid input print out the message
     MessageCli.PRINT_INFO_HAND.printMessage(name, stringHumanFingers, stringHumanSum);
 
     int jarvisFingers = 0;
     int jarvisSum = 0;
 
-    Difficulties aiBot = AiFactory.createAiBot(difficulty);
+    // Create a new ai bot at the specified difficulty
+    // Generate a finger and sum
+    AiBot aiBot = AiFactory.createAiBot(difficulty);
     aiBot.setStrategy(roundNumber);
     jarvisFingers = aiBot.generateFinger();
     jarvisSum = aiBot.generateSum(jarvisFingers, roundNumber, numbersPlayed);
@@ -73,9 +78,11 @@ public class Morra {
     int humanFingers = Integer.parseInt(stringHumanFingers);
     int humanSum = Integer.parseInt(stringHumanSum);
 
+    // Check who has made a correct guess
     boolean isHumanCorrect = (humanSum == humanFingers + jarvisFingers);
     boolean isJarvisCorrect = (jarvisSum == humanFingers + jarvisFingers);
 
+    // Print out result and allocate points
     if (isHumanCorrect && !isJarvisCorrect) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
       humanPoints++;
@@ -87,12 +94,11 @@ public class Morra {
     }
 
     // Check if someone has won
-
-    if (humanPoints == pointsToWin) {
+    if (humanPoints == numPointsToWin) {
       MessageCli.END_GAME.printMessage(name, roundNumberString);
       resetGame();
       return;
-    } else if (jarvisPoints == pointsToWin) {
+    } else if (jarvisPoints == numPointsToWin) {
       MessageCli.END_GAME.printMessage("Jarvis", roundNumberString);
       resetGame();
       return;
@@ -111,10 +117,11 @@ public class Morra {
       return;
     }
 
+    // Otherwise display the statistics
     MessageCli.PRINT_PLAYER_WINS.printMessage(
-        name, String.valueOf(humanPoints), String.valueOf(pointsToWin - humanPoints));
+        name, String.valueOf(humanPoints), String.valueOf(numPointsToWin - humanPoints));
     MessageCli.PRINT_PLAYER_WINS.printMessage(
-        "Jarvis", String.valueOf(jarvisPoints), String.valueOf(pointsToWin - jarvisPoints));
+        "Jarvis", String.valueOf(jarvisPoints), String.valueOf(numPointsToWin - jarvisPoints));
   }
 
   private boolean readAndCheckFingersAndSum() {
@@ -128,7 +135,6 @@ public class Morra {
 
     // Check that number of fingers is between 0 and 5 (inclusive)
     // And that sum is between 1 and 10 (inclusive)
-
     return Utils.isInteger(stringHumanFingers)
         && Utils.isInteger(stringHumanSum)
         && Integer.parseInt(stringHumanFingers) > 0

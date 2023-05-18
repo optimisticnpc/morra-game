@@ -2,7 +2,7 @@ package nz.ac.auckland.se281.gamedifficulties;
 
 import nz.ac.auckland.se281.strategies.Average;
 
-public class Medium extends Difficulties {
+public class Medium extends AiBot {
 
   @Override
   public void setStrategy(int roundNumber) {
