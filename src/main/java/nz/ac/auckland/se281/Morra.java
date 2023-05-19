@@ -12,7 +12,7 @@ public class Morra {
   private String stringHumanFingers;
   private String stringHumanSum;
   private int humanPoints;
-  private int jarvisPoints;
+  private int aiPoints;
   private int numPointsToWin;
   private Difficulty difficulty;
   private List<Integer> numbersPlayed;
@@ -59,33 +59,33 @@ public class Morra {
     // Once it is a valid input print out the message
     MessageCli.PRINT_INFO_HAND.printMessage(name, stringHumanFingers, stringHumanSum);
 
-    int jarvisFingers;
-    int jarvisSum;
+    int aiFingers;
+    int aiSum;
 
     // Create a new ai bot at the specified difficulty
     // Generate a finger and sum
     AiBot aiBot = AiFactory.createAiBot(difficulty);
     aiBot.chooseStrategy(roundNumber);
-    jarvisFingers = aiBot.generateFinger();
-    jarvisSum = aiBot.generateSum(jarvisFingers, roundNumber, numbersPlayed);
+    aiFingers = aiBot.generateFinger();
+    aiSum = aiBot.generateSum(aiFingers, roundNumber, numbersPlayed);
 
     MessageCli.PRINT_INFO_HAND.printMessage(
-        "Jarvis", String.valueOf(jarvisFingers), String.valueOf(jarvisSum));
+        "Jarvis", String.valueOf(aiFingers), String.valueOf(aiSum));
 
     int humanFingers = Integer.parseInt(stringHumanFingers);
     int humanSum = Integer.parseInt(stringHumanSum);
 
     // Check who has made a correct guess
-    boolean isHumanCorrect = (humanSum == humanFingers + jarvisFingers);
-    boolean isJarvisCorrect = (jarvisSum == humanFingers + jarvisFingers);
+    boolean isHumanCorrect = (humanSum == humanFingers + aiFingers);
+    boolean isAiCorrect = (aiSum == humanFingers + aiFingers);
 
     // Print out result and allocate points
-    if (isHumanCorrect && !isJarvisCorrect) {
+    if (isHumanCorrect && !isAiCorrect) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
       humanPoints++;
-    } else if (isJarvisCorrect && !isHumanCorrect) {
+    } else if (isAiCorrect && !isHumanCorrect) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
-      jarvisPoints++;
+      aiPoints++;
     } else {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
     }
@@ -95,7 +95,7 @@ public class Morra {
       MessageCli.END_GAME.printMessage(name, roundNumberString);
       resetGame();
       return;
-    } else if (jarvisPoints == numPointsToWin) {
+    } else if (aiPoints == numPointsToWin) {
       MessageCli.END_GAME.printMessage("Jarvis", roundNumberString);
       resetGame();
       return;
@@ -117,7 +117,7 @@ public class Morra {
     MessageCli.PRINT_PLAYER_WINS.printMessage(
         name, String.valueOf(humanPoints), String.valueOf(numPointsToWin - humanPoints));
     MessageCli.PRINT_PLAYER_WINS.printMessage(
-        "Jarvis", String.valueOf(jarvisPoints), String.valueOf(numPointsToWin - jarvisPoints));
+        "Jarvis", String.valueOf(aiPoints), String.valueOf(numPointsToWin - aiPoints));
   }
 
   private boolean readAndCheckFingersAndSum() {
@@ -125,7 +125,12 @@ public class Morra {
     String input = Utils.scanner.nextLine();
 
     // Split the input into two individual arguments
+    // Check if there are exactly two arguments, if not return false
     String[] args = input.split(" ");
+    if (args.length != 2) {
+      return false;
+    }
+
     stringHumanFingers = args[0];
     stringHumanSum = args[1];
 
@@ -133,7 +138,7 @@ public class Morra {
     // And that sum is between 1 and 10 (inclusive)
     return Utils.isInteger(stringHumanFingers)
         && Utils.isInteger(stringHumanSum)
-        && Integer.parseInt(stringHumanFingers) > 0
+        && Integer.parseInt(stringHumanFingers) >= 1
         && Integer.parseInt(stringHumanFingers) <= 5
         && Integer.parseInt(stringHumanSum) >= 1
         && Integer.parseInt(stringHumanSum) <= 10;
@@ -141,7 +146,7 @@ public class Morra {
 
   private void resetGame() {
     humanPoints = 0;
-    jarvisPoints = 0;
+    aiPoints = 0;
     roundNumber = -1;
   }
 }
