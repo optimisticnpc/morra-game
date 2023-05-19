@@ -1,13 +1,8 @@
 package nz.ac.auckland.se281.strategies;
 
 import java.util.List;
-import nz.ac.auckland.se281.Utils;
 
-public class Average implements Strategy {
-
-  public int generateFinger() {
-    return Utils.getRandomNumber(1, 5);
-  }
+public class Average extends Strategy {
 
   public int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed) {
     double total = 0;
@@ -22,5 +17,3 @@ public class Average implements Strategy {
     return fingers + average;
   }
 }
-
-

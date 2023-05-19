@@ -1,11 +1,13 @@
 package nz.ac.auckland.se281.strategies;
 
 import java.util.List;
+import nz.ac.auckland.se281.Utils;
 
-public interface Strategy {
-  // TODO: should i make an abstract class so the strategies can share a generateFinger
-  public int generateFinger();
+public abstract class Strategy {
 
-  public int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed);
+  public int generateFinger() {
+    return Utils.getRandomNumber(1, 5);
+  }
+
+  public abstract int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed);
 }
-

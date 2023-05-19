@@ -1,13 +1,8 @@
 package nz.ac.auckland.se281.strategies;
 
 import java.util.List;
-import nz.ac.auckland.se281.Utils;
 
-public class Top implements Strategy {
-
-  public int generateFinger() {
-    return Utils.getRandomNumber(1, 5);
-  }
+public class Top extends Strategy {
 
   public int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed) {
     int currentMostCommonNumber = -1;
