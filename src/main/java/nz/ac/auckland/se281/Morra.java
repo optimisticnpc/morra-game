@@ -65,9 +65,9 @@ public class Morra {
     // Create a new ai bot at the specified difficulty
     // Generate a finger and sum
     AiBot aiBot = AiFactory.createAiBot(difficulty);
-    aiBot.chooseStrategy(roundNumber);
+    aiBot.chooseStrategy(roundNumber, numbersPlayed);
     aiFingers = aiBot.generateFinger();
-    aiSum = aiBot.generateSum(aiFingers, roundNumber, numbersPlayed);
+    aiSum = aiBot.generateSum(aiFingers);
 
     MessageCli.PRINT_INFO_HAND.printMessage(
         "Jarvis", String.valueOf(aiFingers), String.valueOf(aiSum));

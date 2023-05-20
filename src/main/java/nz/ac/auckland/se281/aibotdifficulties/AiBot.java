@@ -13,7 +13,7 @@ public abstract class AiBot {
     this.strategy = new RandomStrategy();
   }
 
-  public void chooseStrategy(int roundNumber) {}
+  public void chooseStrategy(int roundNumber, List<Integer> numbersPlayed) {}
 
   public void setStrategy(Strategy strategy) {
     this.strategy = strategy;
@@ -23,7 +23,7 @@ public abstract class AiBot {
     return strategy.generateFinger();
   }
 
-  public int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed) {
-    return strategy.generateSum(fingers, roundNumber, numbersPlayed);
+  public int generateSum(int fingers) {
+    return strategy.generateSum(fingers);
   }
 }

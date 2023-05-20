@@ -4,7 +4,15 @@ import java.util.List;
 
 public class TopStrategy extends Strategy {
 
-  public int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed) {
+  private List<Integer> numbersPlayed;
+  private int roundNumber;
+
+  public TopStrategy(int roundNumber, List<Integer> numbersPlayed) {
+    this.numbersPlayed = numbersPlayed;
+    this.roundNumber = roundNumber;
+  }
+
+  public int generateSum(int fingers) {
     int currentMostCommonNumber = -1;
 
     int countOfCurrentMostCommonNumber = 0;
@@ -14,10 +22,10 @@ public class TopStrategy extends Strategy {
     // Finds the value of the most common number
     // If there two numbers that have been played the same amount of times then
     // our function returns the one that appears last in the list
-    for (int i = 0; i < numbersPlayed.size(); i++) {
+    for (int i = 0; i < roundNumber; i++) {
       int currentNumber = numbersPlayed.get(i);
 
-      for (int j = 0; j < numbersPlayed.size(); j++) {
+      for (int j = 0; j < roundNumber; j++) {
         if (numbersPlayed.get(j) == currentNumber) {
           numberCount++;
         }
