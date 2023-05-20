@@ -1,7 +1,7 @@
 package nz.ac.auckland.se281.aibotdifficulties;
 
 import java.util.List;
-import nz.ac.auckland.se281.strategies.Random;
+import nz.ac.auckland.se281.strategies.RandomStrategy;
 import nz.ac.auckland.se281.strategies.Strategy;
 
 public abstract class AiBot {
@@ -10,7 +10,7 @@ public abstract class AiBot {
 
   public AiBot() {
     // Every difficulty starts with the random strategy
-    this.strategy = new Random();
+    this.strategy = new RandomStrategy();
   }
 
   public void chooseStrategy(int roundNumber) {}

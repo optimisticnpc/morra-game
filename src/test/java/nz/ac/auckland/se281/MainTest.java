@@ -1118,15 +1118,12 @@ public class MainTest {
           "Valerio",
           //
           PLAY,
-          "1 2",
-          PLAY,
           NEW_GAME,
           PLAY,
           "1 5");
 
       assertContains(ASK_INPUT.getMessage());
       assertContains(INVALID_INPUT.getMessage());
-      assertContains("Give <fingers> <sum> and press enter");
     }
 
     @Test

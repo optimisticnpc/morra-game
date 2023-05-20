@@ -9,5 +9,6 @@ public abstract class Strategy {
     return Utils.getRandomNumber(1, 5);
   }
 
+  // TODO: Think about this
   public abstract int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed);
 }

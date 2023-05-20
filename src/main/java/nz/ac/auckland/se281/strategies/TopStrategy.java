@@ -2,7 +2,7 @@ package nz.ac.auckland.se281.strategies;
 
 import java.util.List;
 
-public class Top extends Strategy {
+public class TopStrategy extends Strategy {
 
   public int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed) {
     int currentMostCommonNumber = -1;

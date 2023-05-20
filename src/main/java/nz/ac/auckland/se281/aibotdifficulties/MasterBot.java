@@ -1,7 +1,7 @@
 package nz.ac.auckland.se281.aibotdifficulties;
 
-import nz.ac.auckland.se281.strategies.Average;
-import nz.ac.auckland.se281.strategies.Top;
+import nz.ac.auckland.se281.strategies.AverageStrategy;
+import nz.ac.auckland.se281.strategies.TopStrategy;
 
 public class MasterBot extends AiBot {
 
@@ -11,9 +11,9 @@ public class MasterBot extends AiBot {
     // strategies
     if (roundNumber > 3) {
       if (roundNumber % 2 == 0) {
-        setStrategy(new Average());
+        setStrategy(new AverageStrategy());
       } else if (roundNumber % 2 == 1) {
-        setStrategy(new Top());
+        setStrategy(new TopStrategy());
       }
     }
   }

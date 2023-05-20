@@ -2,7 +2,7 @@ package nz.ac.auckland.se281.strategies;
 
 import java.util.List;
 
-public class Average extends Strategy {
+public class AverageStrategy extends Strategy {
 
   public int generateSum(int fingers, int roundNumber, List<Integer> numbersPlayed) {
     double total = 0;
