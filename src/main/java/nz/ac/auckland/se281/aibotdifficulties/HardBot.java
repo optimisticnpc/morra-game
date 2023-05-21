@@ -8,7 +8,7 @@ public class HardBot extends AiBot {
   @Override
   public void chooseStrategy(int roundNumber, List<Integer> numbersPlayed) {
     if (roundNumber > 3) {
-      setStrategy(new TopStrategy(roundNumber, numbersPlayed));
+      setStrategy(new TopStrategy(numbersPlayed));
     }
   }
 }

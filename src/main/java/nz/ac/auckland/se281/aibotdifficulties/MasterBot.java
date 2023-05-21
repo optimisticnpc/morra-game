@@ -12,9 +12,9 @@ public class MasterBot extends AiBot {
     // strategies
     if (roundNumber > 3) {
       if (roundNumber % 2 == 0) {
-        setStrategy(new AverageStrategy(roundNumber, numbersPlayed));
+        setStrategy(new AverageStrategy(numbersPlayed));
       } else if (roundNumber % 2 == 1) {
-        setStrategy(new TopStrategy(roundNumber, numbersPlayed));
+        setStrategy(new TopStrategy(numbersPlayed));
       }
     }
   }

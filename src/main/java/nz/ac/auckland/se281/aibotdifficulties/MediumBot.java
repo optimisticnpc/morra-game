@@ -8,7 +8,7 @@ public class MediumBot extends AiBot {
   @Override
   public void chooseStrategy(int roundNumber, List<Integer> numbersPlayed) {
     if (roundNumber > 3) {
-      setStrategy(new AverageStrategy(roundNumber, numbersPlayed));
+      setStrategy(new AverageStrategy(numbersPlayed));
     }
   }
 }

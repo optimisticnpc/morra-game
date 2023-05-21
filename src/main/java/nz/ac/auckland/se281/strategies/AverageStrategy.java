@@ -5,22 +5,20 @@ import java.util.List;
 public class AverageStrategy extends Strategy {
 
   private List<Integer> numbersPlayed;
-  private int roundNumber;
 
-  public AverageStrategy(int roundNumber, List<Integer> numbersPlayed) {
+  public AverageStrategy(List<Integer> numbersPlayed) {
     this.numbersPlayed = numbersPlayed;
-    this.roundNumber = roundNumber;
   }
 
   public int generateSum(int fingers) {
+    // Loop through the list and sum up the numbers
     double total = 0;
-    for (int i = 0; i < roundNumber; i++) {
+    for (int i = 0; i < numbersPlayed.size(); i++) {
       total = total + numbersPlayed.get(i);
     }
 
-    // Calculate average, use round number of previous round since we only have the numbers for the
-    // previous round
-    int average = (int) Math.round(total / (roundNumber - 1));
+    // Calculate average
+    int average = (int) Math.round(total / numbersPlayed.size());
 
     return fingers + average;
   }
