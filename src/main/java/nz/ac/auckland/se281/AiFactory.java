@@ -26,7 +26,7 @@ public class AiFactory {
         return new MasterBot();
 
       default:
-        return null;
+        throw new IllegalArgumentException("Note a valid difficulty");
     }
   }
 }

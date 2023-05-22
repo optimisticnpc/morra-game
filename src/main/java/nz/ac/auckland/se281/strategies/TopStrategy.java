@@ -19,7 +19,7 @@ public class TopStrategy extends Strategy {
 
     // Finds the value of the most common number
     // If there two numbers that have been played the same amount of times then
-    // our function returns the one that appears last in the list
+    // our function returns the one that appears first in the list
     for (int i = 0; i < numbersPlayed.size(); i++) {
       int currentNumber = numbersPlayed.get(i);
 
